@@ -630,7 +630,7 @@ function defer() {
         }, void 0);
     };
 
-    if (localenv.PROMISE_TIMEOUT)
+    if (process.env.PROMISE_TIMEOUT)
         return deferred.timeout(process.env.PROMISE_TIMEOUT);
 
     return deferred;
