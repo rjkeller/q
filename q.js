@@ -630,6 +630,9 @@ function defer() {
         }, void 0);
     };
 
+    if (localenv.PROMISE_TIMEOUT)
+        return deferred.timeout(process.env.PROMISE_TIMEOUT);
+
     return deferred;
 }
 
@@ -1807,7 +1810,7 @@ Promise.prototype.timeout = function (ms, error) {
             error = new Error(error || "Timed out after " + ms + " ms");
             error.code = "ETIMEDOUT";
         }
-        deferred.reject(error);
+        deferred.reject(error + "\n\n" + error.stack);
     }, ms);
 
     this.then(function (value) {
